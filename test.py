@@ -18,13 +18,13 @@ def soal():
         salah = jawaban[currIdx][1]
     drawTextBold(soal,410,500)
     
-    # randomize = random.int(0,1)
-    #if randomize == 0:
-        # jwb_kiri(salah)
-        # jwb_kanan(benar)
-    # else 
-        # jwb_kiri(benar)
-        # jwb_kanan(salah)
+    randomize = rd.int(0,1)
+    if randomize == 0:
+        jwb_kiri(salah)
+        jwb_kanan(benar)
+    else:
+        jwb_kiri(benar)
+        jwb_kanan(salah)
 
 def jwb_kiri(pilihan): #kiri
     glPushMatrix()
@@ -49,7 +49,7 @@ def jwb_kanan(pilihan):
     glVertex2f(840, 275)
     glEnd()
 
-    drawTextBold(txt_salah2[0],750,300)
+    drawTextBold(pilihan,750,300)
     glPopMatrix()
 
 def drawText(ch,xpos,ypos,r,b,g):
@@ -109,16 +109,16 @@ def showScreen():
     glColor3f(255,0,0)
     if jawab == False: # if nyawa != 0
         pass
-        
-        # if currIdx != None:
-            # temp = random.int(0, len(soal)) --> 1
-            # insoal true
-            # if temp not in selected
-                # selected.append temp
-            # else
-                # insoal true 
-                # curidx = temp
-            # soal()
+    global inSoal
+    if currIdx != None:
+        temp = rd.int(0, len(soal)) #--> 1
+        inSoal = True
+        if temp not in selected:
+            selected.append (temp)
+        else:
+            inSoal = True 
+            curidx = temp
+        soal()
     # elif finish:
         # splash menang
     #else:
