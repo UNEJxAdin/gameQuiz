@@ -9,16 +9,21 @@ pos_jwb = [(170, 300), (720, 840)]
 txt_soal = ["1. Dasar negara Indonesia adalah", "2. Mage apa yang terkuat"]
 jawaban = [["Pancasila", "UUD 1945"],["Magewati", "Kagura"]]
 randomize = None
+nyawa = 3 # nyawa
+finish = False
+inSoal = False # kondisi soal
+currIdx = None # var index soal
+selected = [] # nyimpan yg sudah ditampilkan
 
 def soal():
     global randomize
     if currIdx != None: # currIdx = 1
-        soal = txt_soal[currIdx]
+        _soal = txt_soal[currIdx]
         benar = jawaban[currIdx][0]
         salah = jawaban[currIdx][1]
-    drawTextBold(soal,410,500)
+    drawTextBold(_soal,410,500)
     
-    randomize = rd.int(0,1)
+    randomize = rd.randint(0,1)
     if randomize == 0:
         jwb_kiri(salah)
         jwb_kanan(benar)
@@ -102,22 +107,24 @@ def mouseFunc(button, state, x, y):
             print("Salah")
 
 def showScreen():
+    global currIdx
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glClearColor(224,255,255,0)
     glLoadIdentity()
     iterate()
     glColor3f(255,0,0)
     if jawab == False: # if nyawa != 0
-        pass
+        soal()
+        jwb_kanan()
     global inSoal
     if currIdx != None:
-        temp = rd.int(0, len(soal)) #--> 1
+        temp = rd.randint(0, len(soal)) #--> 1
         inSoal = True
         if temp not in selected:
             selected.append (temp)
         else:
             inSoal = True 
-            curidx = temp
+            currIdx = temp
         soal()
     # elif finish:
         # splash menang
@@ -125,11 +132,6 @@ def showScreen():
         # Splash game over
     glutSwapBuffers()
 
-nyawa = 3 # nyawa
-finish = False
-inSoal = False # kondisi soal
-currIdx = None # var index soal
-selected = [] # nyimpan yg sudah ditampilkan
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
 glutInitWindowSize(1000, 700)
