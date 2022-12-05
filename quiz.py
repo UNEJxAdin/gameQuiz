@@ -40,8 +40,8 @@ def soal():
 
 def jwb_salah(px, py):          #BENTUK PERSEGI PANJANG SEBAGAI BACKGROUND DARI JAWABAN
     glPushMatrix()
-    glBegin(GL_QUADS)
-    glColor3ub(0,105,255)   #WARNA
+    glBegin(GL_POLYGON)
+    glColor3ub(204,0,204)   #WARNA
     glVertex2f(px, 275)
     glVertex2f(px, 340)
     glVertex2f(px + 130, 340)
@@ -53,8 +53,8 @@ def jwb_salah(px, py):          #BENTUK PERSEGI PANJANG SEBAGAI BACKGROUND DARI 
 
 def jwb_benar(px, py):  #BENTUK PERSEGI PANJANG SEBAGAI BACKGROUND DARI JAWABAN
     glPushMatrix()
-    glBegin(GL_QUADS)
-    glColor3ub(0,105,255)   #WARNA
+    glBegin(GL_POLYGON)
+    glColor3ub(204,0,204)   #WARNA
     glVertex2f(px, 275)
     glVertex2f(px, 340)
     glVertex2f(px + 130, 340)
@@ -94,42 +94,17 @@ def drawTextBold(ch,xpos,ypos):                     #MENULIS TEKS TEBAL
 
 def background():
     glPushMatrix()
-
     glTranslated(500, 350, 0)
-    # Background =======
+    # Background ============================================
     glBegin(GL_POLYGON)
-    glColor3ub(0,102,51)
+    glColor3ub(153,204,255)
     glVertex2f(-500,-350)
     glVertex2f(-500,350)
     glVertex2f(500,350)
     glVertex2f(500,-350)
     glEnd()
 
-    #BANGUN 1 HITAM
-    glBegin(GL_POLYGON)
-    glColor3d(0,0,0)
-    glVertex2f(-500, -350)
-    glVertex2f(-400, -250)
-    glVertex2f(-300, -350)
-    glEnd()
-
-    #BANGUN 2 KUNING
-    glBegin(GL_POLYGON)
-    glColor3d(255,255,0)
-    glVertex2f(-400, -250)
-    glVertex2f(-300, -350)
-    glVertex2f(-200, -250)
-    glEnd()
-
-    #BANGUN 3 HITAM
-    glBegin(GL_POLYGON)
-    glColor3d(0,0,0)
-    glVertex2f(-300, -350)
-    glVertex2f(-200, -250)
-    glVertex2f(-100, -350)
-    glEnd()
-
-    #BANGUN 4 KUNING
+    #BANGUN SEGITIGA DARI KIRI
     glBegin(GL_POLYGON)
     glColor3d(255,255,0)
     glVertex2f(-500, -350)
@@ -137,39 +112,20 @@ def background():
     glVertex2f(-500, -150)
     glEnd()
 
-    #BANGUN 5 HITAM
     glBegin(GL_POLYGON)
     glColor3d(0,0,0)
+    glVertex2f(-500, -350)
     glVertex2f(-400, -250)
-    glVertex2f(-500, -150)
-    glVertex2f(-400, -50)
-    glEnd()
-
-    #BANGUN 6 HITAM
-    glBegin(GL_POLYGON)
-    glColor3d(0,0,0)
     glVertex2f(-300, -350)
-    glVertex2f(-200, -250)
-    glVertex2f(-100, -350)
     glEnd()
-
-    #BANGUN 7 KUNING
+    
     glBegin(GL_POLYGON)
     glColor3d(255,255,0)
-    glVertex2f(-500, -150)
-    glVertex2f(-400, -50)
-    glVertex2f(-500, 50)
+    glVertex2f(-400, -250)
+    glVertex2f(-300, -350)
+    glVertex2f(-200, -250)
     glEnd()
 
-    #BANGUN 8 HITAM
-    glBegin(GL_POLYGON)
-    glColor3d(0,0,0)
-    glVertex2f(-400, -50)
-    glVertex2f(-500, -150)
-    glVertex2f(-400, -150)
-    glEnd()
-
-    #BANGUN 9 HITAM
     glBegin(GL_POLYGON)
     glColor3d(0,0,0)
     glVertex2f(-300, -350)
@@ -177,7 +133,56 @@ def background():
     glVertex2f(-100, -350)
     glEnd()
 
-    #BINTANG
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(-200, -250)
+    glVertex2f(-100, -350)
+    glVertex2f(0, -250)
+    glEnd()
+    
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(-100, -350)
+    glVertex2f(0, -250)
+    glVertex2f(100, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(0, -250)
+    glVertex2f(100, -350)
+    glVertex2f(200, -250)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(100, -350)
+    glVertex2f(200, -250)
+    glVertex2f(300, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(200, -250)
+    glVertex2f(400, -250)
+    glVertex2f(300, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(300, -350)
+    glVertex2f(400, -250)
+    glVertex2f(500, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(400, -250)
+    glVertex2f(500, -150)
+    glVertex2f(500, -350)
+    glEnd()
+    
+    #BINTANG==========================================
     glBegin(GL_POLYGON)
     glColor3d(255,0,0)
     glVertex2f(-400, 240)
@@ -243,7 +248,7 @@ def mouseFunc(button, state, x, y):
 
 def Keyboard(key, x, y):
     global nyawa, score, nSoal, randomize, count
-    if nyawa == 0 or score == 10:
+    if nyawa == 0 or score <= 10:
         if key == b'r':
             count = 0
             nyawa = 3
@@ -275,7 +280,6 @@ def showScreen():
         drawText(f'SCORE KAMU : {score}', 470, 320, 0,0,0)
         drawText('tekan "r" untuk restart',435, 292, 0,0,0)
     
-
     glutSwapBuffers()
 
 glutInit()
