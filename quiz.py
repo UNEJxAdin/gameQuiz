@@ -184,7 +184,7 @@ def background():
     
     #BINTANG==========================================
     glBegin(GL_POLYGON)
-    glColor3d(255,0,0)
+    glColor3d(0,0,0)
     glVertex2f(-400, 240)
     glVertex2f(-440, 260)
     glVertex2f(-400, 280)
@@ -196,7 +196,7 @@ def background():
     glEnd()
 
     glBegin(GL_POLYGON)
-    glColor3d(255,255,255)
+    glColor3d(255,255,0)
     glVertex2f(-380, 260)
     glVertex2f(-380, 320)
     glVertex2f(-360, 280)
@@ -245,7 +245,6 @@ def mouseFunc(button, state, x, y):
             nSoal = rd.randint(0, jmlSoal-1)
             randomize = rd.randint(0, 1)
             
-
 def Keyboard(key, x, y):
     global nyawa, score, nSoal, randomize, count
     if nyawa == 0 or score <= 10:
@@ -272,7 +271,7 @@ def showScreen():
     # glEnd()
 
     if nyawa > 0 and count < 10:
-        drawText(f"LIFE : {nyawa}", 900, 650, 0,0,0)
+        drawText(f"LIFE : {nyawa}", 900, 650, 0,0,0)  
         drawText(f"SCORE : {score}", 900, 625, 0,0,0)
         soal()
     else:
