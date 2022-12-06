@@ -13,9 +13,8 @@ with open ('soal.csv', 'r') as sl:
     _soal = csv.reader(sl, delimiter=',')
     for i in _soal:
         txt_soal.append(i)
-
+play = False
 pos_jwb = [[170, 300], [740, 300]] # MENENTUKAN POSISI JAWABAN
-selected = [] 
 randomize = None # MENENTUKAN POSISI JAWABAN
 jmlSoal = len(txt_soal)-1 #
 
@@ -23,11 +22,14 @@ count = 0 #MENGHITUNG SOAL TELAH DITAMPILKAN
 
 score = 0 #SCORE AWAL
 nyawa = 3 # NYAWA AWAL
-nSoal = rd.randint(0, jmlSoal-1) #MENENTUKAN SOAL YANG AKAN DITAMPILKAN
+nSoal = 0 #MENENTUKAN SOAL YANG AKAN DITAMPILKAN
 randomize = rd.randint(0, 1) #POSISI JAWABAN
-
+currIdx = None
 def soal():
-    drawTextBold(txt_soal[nSoal][0],400,500)    #MENAMPILKAN SOAL SECARA RANDOM 
+    global nSoal
+    soal = txt_soal[nSoal][0]
+    drawTextBold(soal,400,500)    #MENAMPILKAN SOAL SECARA RANDOM 
+
     if randomize == 0: 
         benar = pos_jwb[0]  #JWB BENAR 
         salah = pos_jwb[1]  #JWB SALAH
@@ -182,6 +184,84 @@ def background():
     glVertex2f(500, -350)
     glEnd()
     
+    #SEGITIGA PALING DALAM==================================
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(-500, -200)
+    glVertex2f(-450, -250)
+    glVertex2f(-500, -300)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(-450, -350)
+    glVertex2f(-400, -300)
+    glVertex2f(-350, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(-350, -250)
+    glVertex2f(-300, -300)
+    glVertex2f(-250, -250)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(-250, -350)
+    glVertex2f(-200, -300)
+    glVertex2f(-150, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(-150, -250)
+    glVertex2f(-100, -300)
+    glVertex2f(-50, -250)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(-50, -350)
+    glVertex2f(0, -300)
+    glVertex2f(50, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(50, -250)
+    glVertex2f(100, -300)
+    glVertex2f(150, -250)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(150, -350)
+    glVertex2f(200, -300)
+    glVertex2f(250, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(250, -250)
+    glVertex2f(300, -300)
+    glVertex2f(350, -250)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(255,255,0)
+    glVertex2f(350, -350)
+    glVertex2f(400, -300)
+    glVertex2f(450, -350)
+    glEnd()
+
+    glBegin(GL_POLYGON)
+    glColor3d(0,0,0)
+    glVertex2f(500, -300)
+    glVertex2f(450, -250)
+    glVertex2f(500, -200)
+    glEnd()
+
     #BINTANG==========================================
     glBegin(GL_POLYGON)
     glColor3d(0,0,0)
@@ -221,7 +301,10 @@ def iterate():
     glLoadIdentity()
 
 def mouseFunc(button, state, x, y):
-    global nSoal, randomize, nyawa, score, count, selected
+    global nSoal, randomize, nyawa, score, count, play
+    if button == GLUT_LEFT_BUTTON:
+            if (x >= 400 and x <= 600) and (y >= 300 and y <= 400):
+                play = True
     if nyawa > 0:
         if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
             print(f"{x}, {y}")
@@ -242,9 +325,11 @@ def mouseFunc(button, state, x, y):
                 if ((pos_jwb[1][0] <= x <= pos_jwb[1][0]+150) and (350 <= y <= 430)):
                     score += 1
                     count += 1
-            nSoal = rd.randint(0, jmlSoal-1)
+            if nSoal < jmlSoal:
+                nSoal+=1
             randomize = rd.randint(0, 1)
-            
+        else:
+            pass
 def Keyboard(key, x, y):
     global nyawa, score, nSoal, randomize, count
     if nyawa == 0 or score <= 20:
@@ -269,16 +354,24 @@ def showScreen():
     # glBegin(GL_POINTS)
     # glVertex2f(20, 20)
     # glEnd()
-
-    if nyawa > 0 and count < 20:
-        drawText(f"LIFE : {nyawa}", 900, 650, 0,0,0)  
-        drawText(f"SCORE : {score}", 900, 625, 0,0,0)
-        soal()
+    if play == True:
+        if nyawa > 0 and count < 20:
+            drawText(f"LIFE : {nyawa}", 900, 650, 0,0,0)  
+            drawText(f"SCORE : {score}", 900, 625, 0,0,0)
+            soal()
+        else:
+            drawTextBold("GAME SELESAI", 460, 350)
+            drawText(f'SCORE KAMU : {score}', 470, 320, 0,0,0)
+            drawText('tekan "r" untuk restart',435, 292, 0,0,0)
     else:
-        drawTextBold("GAME SELESAI", 460, 350)
-        drawText(f'SCORE KAMU : {score}', 470, 320, 0,0,0)
-        drawText('tekan "r" untuk restart',435, 292, 0,0,0)
-    
+        glBegin(GL_POLYGON)
+        glColor3d(255,255,255)
+        glVertex2f(400, 400)
+        glVertex2f(400, 300)
+        glVertex2f(600, 300)
+        glVertex2f(600, 400)
+        glEnd()
+        drawTextBold("PLAY", 460, 350)
     glutSwapBuffers()
 
 glutInit()
