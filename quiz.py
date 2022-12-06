@@ -247,7 +247,7 @@ def mouseFunc(button, state, x, y):
             
 def Keyboard(key, x, y):
     global nyawa, score, nSoal, randomize, count
-    if nyawa == 0 or score <= 10:
+    if nyawa == 0 or score <= 20:
         if key == b'r':
             count = 0
             nyawa = 3
@@ -270,7 +270,7 @@ def showScreen():
     # glVertex2f(20, 20)
     # glEnd()
 
-    if nyawa > 0 and count < 10:
+    if nyawa > 0 and count < 20:
         drawText(f"LIFE : {nyawa}", 900, 650, 0,0,0)  
         drawText(f"SCORE : {score}", 900, 625, 0,0,0)
         soal()
