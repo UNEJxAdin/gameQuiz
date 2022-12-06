@@ -23,7 +23,7 @@ count = 0 #MENGHITUNG SOAL TELAH DITAMPILKAN
 score = 0 #SCORE AWAL
 nyawa = 3 # NYAWA AWAL
 nSoal = 0 #MENENTUKAN SOAL YANG AKAN DITAMPILKAN
-randomize = rd.randint(0, 1) #POSISI JAWABAN
+randomize = rd.randint(0, 1) # RANDOM POSISI JAWABAN
 currIdx = None
 def soal():
     global nSoal
