@@ -374,7 +374,7 @@ def showScreen():
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)
 glutInitWindowSize(1000, 700)
-glutInitWindowPosition(0,0)
+glutInitWindowPosition(250,35)
 wind = glutCreateWindow("Quiziz")
 glutDisplayFunc(showScreen)
 glutKeyboardFunc(Keyboard)
