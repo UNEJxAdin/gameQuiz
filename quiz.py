@@ -24,7 +24,6 @@ score = 0 #SCORE AWAL
 nyawa = 3 # NYAWA AWAL
 nSoal = 0 #MENENTUKAN SOAL YANG AKAN DITAMPILKAN
 randomize = rd.randint(0, 1) # RANDOM POSISI JAWABAN
-currIdx = None
 def soal():
     global nSoal
     soal = txt_soal[nSoal][0]
@@ -43,7 +42,7 @@ def soal():
 def jwb_salah(px, py):          #BENTUK PERSEGI PANJANG SEBAGAI BACKGROUND DARI JAWABAN
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3ub(204,0,204)   #WARNA
+    glColor3ub(51,255,51)   #WARNA
     glVertex2f(px, 275)
     glVertex2f(px, 340)
     glVertex2f(px + 130, 340)
@@ -56,7 +55,7 @@ def jwb_salah(px, py):          #BENTUK PERSEGI PANJANG SEBAGAI BACKGROUND DARI 
 def jwb_benar(px, py):  #BENTUK PERSEGI PANJANG SEBAGAI BACKGROUND DARI JAWABAN
     glPushMatrix()
     glBegin(GL_POLYGON)
-    glColor3ub(204,0,204)   #WARNA
+    glColor3ub(51,255,51)   #WARNA
     glVertex2f(px, 275)
     glVertex2f(px, 340)
     glVertex2f(px + 130, 340)
@@ -99,7 +98,7 @@ def background():
     glTranslated(500, 350, 0)
     # Background ============================================
     glBegin(GL_POLYGON)
-    glColor3ub(153,204,255)
+    glColor3ub(0,152,51)
     glVertex2f(-500,-350)
     glVertex2f(-500,350)
     glVertex2f(500,350)
@@ -307,7 +306,6 @@ def mouseFunc(button, state, x, y):
                 play = True
     if nyawa > 0:
         if button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
-            print(f"{x}, {y}")
             if randomize == 0:
                 if ((pos_jwb[0][0] <= x <= pos_jwb[0][0]+150) and (350 <= y <= 430)):
                     score += 1
@@ -364,13 +362,13 @@ def showScreen():
             drawText('tekan "r" untuk restart',435, 292, 0,0,0)
     else:
         glBegin(GL_POLYGON)
-        glColor3d(255,255,255)
+        glColor3ub(204,204,0)
         glVertex2f(400, 400)
         glVertex2f(400, 300)
         glVertex2f(600, 300)
         glVertex2f(600, 400)
         glEnd()
-        drawTextBold("PLAY", 460, 350)
+        drawTextBold("PLAY", 475, 343)
     glutSwapBuffers()
 
 glutInit()
